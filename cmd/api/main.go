@@ -53,7 +53,7 @@ func main() {
 		}
 
 		// Conectamos a una base de datos("go-l") y obtenemos una coleccion("players")
-		collection := client.Database("tangowallet").Collection("players")
+		collection := client.Database(os.Getenv("MONGO_NAME_DB")).Collection(os.Getenv("MONGO_NAME_COLLECTION"))
 		insertResult, err := collection.InsertOne(ctx, player)
 		if err != nil {
 			log.Fatal(err)
