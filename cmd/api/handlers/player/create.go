@@ -20,10 +20,9 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/arq_hexagonal/internal/domain"
-	services "github.com/arq_hexagonal/internal/services/player"
 )
 
-func CreatePlayer(c *gin.Context) {
+func (h Handler) CreatePlayer(c *gin.Context) {
 	//1. Traducir el request -> http
 	//	 -validaciones
 	//2. Consumir un servicio -> funcion que tendra la logica de nuestro handlers
@@ -40,7 +39,7 @@ func CreatePlayer(c *gin.Context) {
 	///////////////////////////////////////////////////
 	///////////////////////////////////////////////////
 
-	insertedId, err := services.CreatePlayerService(player)
+	insertedId, err := h.PlayerService.Create(player)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "oops !"})
 	}
