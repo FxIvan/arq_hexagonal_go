@@ -13,3 +13,7 @@ type PlayerService interface {
 	//CreatePlayerService(player domain.Player) (id interface{}, err error)
 	Create(player domain.Player) (id interface{}, err error) //Definimos con solo Create ya que sabemos que hace referencia a Player
 }
+
+type PlayerRepository interface {
+	Insert(player domain.Player) (id interface{}, err error)
+}

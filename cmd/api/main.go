@@ -2,11 +2,14 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
 	"github.com/arq_hexagonal/cmd/api/handlers/player"
+	"github.com/arq_hexagonal/internal/repositories/mongo"
+	playerMongo "github.com/arq_hexagonal/internal/repositories/mongo/player"
 	playerService "github.com/arq_hexagonal/internal/services/player"
 )
 
@@ -18,6 +21,11 @@ func main() {
 	}
 
 	ginEngine := gin.Default()
+
+	client, err := mongo.ConnectClient(os.Getenv("MONGO_URI"))
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	//playerHandler es una variable de tipo player.Handler{} que dentro tiene esto
 	/*
@@ -33,7 +41,14 @@ func main() {
 		Este expone los servicios de nuestra aplicacion, en este caso tiene nuestro:
 		Create(player domain.Player) (id interface{}, err error)
 	*/
-	playerSrv := playerService.Service{}
+
+	playerRepo := playerMongo.Repository{
+		Client: client,
+	}
+
+	playerSrv := playerService.Service{
+		Repo: playerRepo,
+	}
 
 	playerHandler := player.Handler{
 		PlayerService: playerSrv,
