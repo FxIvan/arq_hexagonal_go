@@ -23,30 +23,16 @@ import (
 )
 
 func (h Handler) CreatePlayer(c *gin.Context) {
-	//1. Traducir el request -> http
-	//	 -validaciones
-	//2. Consumir un servicio -> funcion que tendra la logica de nuestro handlers
-	//3. Traducir el response -> http
-
-	///////////////////////////////////////////////////
-	////////////////Traducir Request///////////////////
-	///////////////////////////////////////////////////
-	var player domain.Player                    //////
-	if err := c.BindJSON(&player); err != nil { //////
-		c.JSON(400, gin.H{"error": err.Error()}) ////// Aqui es donde ocurre la validacion
-		return                                   ////// En este caso de alguna manera estamos validando como esta en la linea 36
+	var player domain.Player
+	if err := c.BindJSON(&player); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
 	}
-	///////////////////////////////////////////////////
-	///////////////////////////////////////////////////
 
 	insertedId, err := h.PlayerService.Create(player)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "oops !"})
 	}
-	//////////////////////////////////////////////////////////
-	//////////////Traducir el response////////////////////////
-	//////////////////////////////////////////////////////////
+
 	c.JSON(200, gin.H{"player_id": insertedId}) //
-	//////////////////////////////////////////////////////////
-	/////////////////////////FIN//////////////////////////////
 }
