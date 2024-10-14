@@ -50,32 +50,32 @@ internal/services/player/service.go
 
 # CAPAS ARQUITECTURA HEXAGONAL
 
-# Entities (Entidades)
-# Estas son las entidades del dominio que representan el núcleo de la lógica de negocio
+## Entities (Entidades)
+ Estas son las entidades del dominio que representan el núcleo de la lógica de negocio
 ```
 internal/domain/player.go
 ```
 
-# Interactors (Interactores o Servicios de aplicación)
-# Son los servicios que orquestan la lógica de negocio y las interacciones con las capas externas (adaptadores)
+## Interactors (Interactores o Servicios de aplicación)
+ Son los servicios que orquestan la lógica de negocio y las interacciones con las capas externas (adaptadores)
 ```
 internal/services/player/
 ```
 
-# Transport Layer (Capa de Transporte o Adaptadores de Entrada)
-# Aquí se manejan las entradas al sistema (solicitudes HTTP, mensajes SQS, etc.). Corresponde a los handlers que definen cómo se manejan las solicitudes HTTP o entradas de otros tipos, como los mensajes en cola.
+## Transport Layer (Capa de Transporte o Adaptadores de Entrada)
+ Aquí se manejan las entradas al sistema (solicitudes HTTP, mensajes SQS, etc.). Corresponde a los handlers que definen cómo se manejan las solicitudes HTTP o entradas de otros tipos, como los mensajes en cola.
 ```
 cmd/api/handlers/player/
 ```
 
-# Repositories (Repositorios o Adaptadores de Salida)
-# Aquí se encuentran las implementaciones que permiten la interacción con fuentes de datos externas (como bases de datos o APIs externas)
+## Repositories (Repositorios o Adaptadores de Salida)
+ Aquí se encuentran las implementaciones que permiten la interacción con fuentes de datos externas (como bases de datos o APIs externas)
 ```
 internal/repositories/mongo/
 ```
 
-# Data Sources (Fuentes de Datos)
-# Estas son las bases de datos u otras APIs externas (REST API, gRPC, etc.)
+## Data Sources (Fuentes de Datos)
+ Estas son las bases de datos u otras APIs externas (REST API, gRPC, etc.)
 
 internal/repositories/mongo/
 
